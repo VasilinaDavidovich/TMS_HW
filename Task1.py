@@ -1,4 +1,5 @@
 import json
+import csv
 
 with (open("city.list.json", "r", encoding="utf-8") as file):
     structure = json.load(file)
@@ -24,7 +25,6 @@ for el in structure:
 print("В северном полушарии:", northen, "В южном полушарии:", southern)
 
 #Перевести в CSV файл данные по городам (координаты представить в виде строки значений через запятую).
-import csv
 
 with open('cities.csv', 'w', encoding='utf-8', newline='') as csv_file:
     writer = csv.writer(csv_file)
