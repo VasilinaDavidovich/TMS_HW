@@ -1,0 +1,41 @@
+CREATE DATABASE lesson14;
+
+USE lesson14;
+
+CREATE TABLE users (
+	id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(64) UNIQUE NOT NULL,
+    password VARCHAR(64) NOT NULL,
+    email VARCHAR(254) UNIQUE NOT NULL
+);
+
+CREATE TABLE seller (
+	id INT AUTO_INCREMENT PRIMARY KEY,
+    company VARCHAR(64) UNIQUE NOT NULL,
+    phone VARCHAR(20) UNIQUE NOT NULL,
+    manager VARCHAR(64) NOT NULL
+);
+
+CREATE TABLE products (
+	id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(64) NOT NULL,
+    cost MEDIUMINT UNSIGNED NOT NULL,
+    count SMALLINT UNSIGNED DEFAULT 0,
+    seller_id INT NOT NULL,
+    color VARCHAR(64) DEFAULT '',
+    picture_url VARCHAR(255) DEFAULT ''
+);
+
+CREATE TABLE orders (
+	id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    product_id INT NOT NULL,
+    count SMALLINT UNSIGNED NOT NULL
+);
+
+ALTER TABLE products
+ADD FOREIGN KEY (seller_id) REFERENCES seller(id);
+
+ALTER TABLE orders
+ADD FOREIGN KEY (user_id) REFERENCES users(id),
+ADD FOREIGN KEY (product_id) REFERENCES products(id);
